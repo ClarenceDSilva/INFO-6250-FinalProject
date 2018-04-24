@@ -73,7 +73,7 @@
             <div class="row">
                 <div class="menu_main col-xs-4" style="background-color:#35404f;">
                     <h4 class="menu_main_logo"><i class="fa fa-university" aria-hidden="true"> NU CAREERS</i></h4>
-                    <h1>Hi , ${user}</h1>
+                    <h1>Hello , ${user}</h1>
                     
                 </div>
                 <div class="menu_main_content col-xs-8">

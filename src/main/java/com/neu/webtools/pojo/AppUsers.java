@@ -37,22 +37,22 @@ public class AppUsers {
 	@Column(name = "PASSWORD")
 	private String password;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "ROLE_ID_FK")
 	private Role role;
 	
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<JobDetails> jobDetails = new ArrayList<JobDetails>();
+	/*@OneToMany(mappedBy = "user")
+	private List<JobDetails> jobDetails = new ArrayList<JobDetails>();*/
 	
 	
-	public int getUserid() {
-		return userid;
-	}
 	public void setUserid(int userid) {
 		this.userid = userid;
+	}
+	public int getUserid() {
+		return userid;
 	}
 	public String getFname() {
 		return fname;
@@ -81,12 +81,12 @@ public class AppUsers {
 	public String getEmail() {
 		return email;
 	}
-	public List<JobDetails> getJobDetails() {
+	/*public List<JobDetails> getJobDetails() {
 		return jobDetails;
 	}
 	public void setJobDetails(List<JobDetails> jobDetails) {
 		this.jobDetails = jobDetails;
-	}
+	}*/
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -96,6 +96,10 @@ public class AppUsers {
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	public AppUsers() {
+		
 	}
 }	
 	

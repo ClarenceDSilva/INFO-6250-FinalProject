@@ -61,8 +61,17 @@ public class HomePageController {
 		return null;
 		
 	}
+	@RequestMapping(value = "/logout.htm", method = RequestMethod.GET)
+	protected String logout(HttpServletRequest request) throws Exception{
+		HttpSession session = request.getSession();
+		session.invalidate();
+		System.out.println("User successfully logged out");
+		return "home";
+		
+	}
+	
 	@RequestMapping(value = "/login.htm", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView loginRequest(HttpServletRequest request, HttpServletResponse response, AppUsersDAO appUsersDao, RoleDAO roleDao, ModelMap map) throws IOException {
+	public ModelAndView loginRequest(HttpServletRequest request, HttpServletResponse response, AppUsersDAO appUsersDao, RoleDAO roleDao, ModelMap map){
 		System.out.println("Into loginRequest controller");
 		
 		HttpSession httpSession = request.getSession(true);
@@ -75,7 +84,6 @@ public class HomePageController {
 			AppUsers users = appUsersDao.get(username, password);
 			if(users != null) {
 				httpSession.setAttribute("name", users);
-				//httpSession.setAttribute("name", user.getFname()+" "+user.getLname());
 					
 					// Checking for the appropriate role and rendering the appropriate page
 					if(users.getRole().getRole_name().equalsIgnoreCase("employer")) {
@@ -97,13 +105,6 @@ public class HomePageController {
 			e.printStackTrace();
 		}
 		
-		String action = request.getParameter("action");
-		System.out.println();
-		if(action.equals("logout"))
-		{
-			httpSession.invalidate();
-            response.sendRedirect("home.jsp");
-		}
 		return null;
 	}
 }

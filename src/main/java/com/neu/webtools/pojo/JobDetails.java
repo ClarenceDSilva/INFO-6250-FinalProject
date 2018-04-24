@@ -1,8 +1,7 @@
 package com.neu.webtools.pojo;
 
-import java.util.Date;
+import java.util.Calendar;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,19 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "JOB_DETAILS")
+@PrimaryKeyJoinColumn(name = "JOB_ID_PK")
 public class JobDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int jobId;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "USER_FK")
 	private AppUsers user;
 	
@@ -54,9 +55,16 @@ public class JobDetails {
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
-	@Basic
 	@Temporal(TemporalType.DATE)
-	private Date postedOn;
+	private Calendar postedOn;
+	
+	public int getJobId() {
+		return jobId;
+	}
+	
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
+	}
 	
 	public String getJobTitle() {
 		return jobTitle;
@@ -113,23 +121,17 @@ public class JobDetails {
 	public void setJobUrl(String jobUrl) {
 		this.jobUrl = jobUrl;
 	}
-	public int getJobId() {
-		return jobId;
-	}
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
-	}
 	public AppUsers getUser() {
 		return user;
 	}
 	public void setUser(AppUsers user) {
 		this.user = user;
 	}
-	public Date getPostedOn() {
+	public Calendar getPostedOn() {
 		return postedOn;
 	}
-	public void setPostedOn(Date postedOn) {
-		this.postedOn = postedOn;
+	public void setPostedOn(Calendar postedOn) {
+		this.postedOn = Calendar.getInstance();
 	}
 
 }

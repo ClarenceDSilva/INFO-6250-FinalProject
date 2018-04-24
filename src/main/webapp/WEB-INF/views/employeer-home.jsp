@@ -36,7 +36,7 @@
                         <div class="col-xs-3 droplink" style="background-color:#35404f;" ><a href="#" style="color: lightblue; text-decoration:none" id="dropdownMenu1" data-toggle="dropdown">Accounts <span class="caret"></span></a>
                             <div class="dropdown-content">
                                 <a href="#">Edit Profile </a>
-                                <a href="login.htm?action=logout">Logout</a>
+                                <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
                     <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employeer/postjob.htm?user=${name.fname}"  style="color: lightblue; text-decoration:none">Post a Job</a></div>
                     <div class="col-xs-3" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">View Applications</a></div>
@@ -50,6 +50,14 @@
 		    X
 		  </button>
 		</div>
+		
+		  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+		  <strong>${errorMessage}</strong>
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    X
+		  </button>
+		</div>
+		
         </div>
         <div><br><br></div>
        

@@ -11,21 +11,22 @@ public class EmployerDAO extends DAO {
 		try {
 			begin();
 			System.out.println("INSIDE postJob METHOD");
-			JobDetails jobObj = new JobDetails();
-			jobObj.setCompanyName(job.getCompanyName());
-			jobObj.setCountry(job.getCountry());
-			jobObj.setDescription(job.getDescription());
-			jobObj.setIndustry(job.getIndustry());
-			jobObj.setJobTitle(job.getJobTitle());
-			jobObj.setJobType(job.getJobType());
-			jobObj.setJobUrl(job.getJobUrl());
-			jobObj.setMajor(job.getMajor());
-			jobObj.setState(job.getState());
-			AppUsers users = new AppUsers();
-			users = jobObj.getUser();
-			jobObj.setUser(users);
 			
-			getSession().save(jobObj);
+			/*job.setCompanyName(job.getCompanyName());
+			job.setCountry(job.getCountry());
+			job.setDescription(job.getDescription());
+			job.setIndustry(job.getIndustry());
+			job.setJobTitle(job.getJobTitle());
+			job.setJobType(job.getJobType());
+			job.setJobUrl(job.getJobUrl());
+			job.setMajor(job.getMajor());
+			job.setState(job.getState());
+			job.setPostedOn(job.getPostedOn());
+			AppUsers users = new AppUsers();
+			users = job.getUser();
+			job.setUser(users);*/
+			
+			getSession().persist(job);
 			commit();
 			return job;
 		}catch(HibernateException e) {

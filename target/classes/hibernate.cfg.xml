@@ -17,4 +17,4 @@
 		<mapping class="com.neu.webtools.pojo.Role"/>
 		<mapping class="com.neu.webtools.pojo.JobDetails"/>
 	</session-factory>
-</hibernate-configuration>
+</hibernate-configuration>  

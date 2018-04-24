@@ -31,7 +31,7 @@
                         <div class="col-xs-3 droplink" style="background-color:#35404f;" ><a href="#" style="color: lightblue; text-decoration:none" id="dropdownMenu1" data-toggle="dropdown">Accounts <span class="caret"></span></a>
                             <div class="dropdown-content">
                                 <a href="#">Edit Profile </a>
-                                <a href="login.htm?action=logout">Logout</a>
+                                <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
                     <div class="col-xs-4" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Apply for jobs</a></div>
                     <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">View applied jobs</a></div>

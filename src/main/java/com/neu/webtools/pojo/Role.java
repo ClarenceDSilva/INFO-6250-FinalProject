@@ -23,22 +23,19 @@ public class Role {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ROLE_ID_PK", unique = true, nullable = false)
 	private int roleId;
 
 	@Column(name = "ROLE_NAME")
 	private String role_name;
 
 	
-	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
-	/*@JoinTable(name = "ROLE_USER", joinColumns=@JoinColumn(name = "ROLE_ID"),
-					inverseJoinColumns = @JoinColumn(name = "USER_ID"))*/
+	@OneToMany(cascade = CascadeType.MERGE)
 	private List<AppUsers> user = new ArrayList<AppUsers>();
 
 	public int getRoleId() {
 		return roleId;
 	}
-
+	
 	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
