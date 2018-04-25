@@ -19,6 +19,7 @@ public class AppUsersDAO extends DAO {
 			query.setString("username", username);
 			query.setString("password", password);
 			AppUsers user = (AppUsers) query.uniqueResult();
+			close();
 			
 			if(user == null) {
 				System.out.println("No User found in DAO Class");
@@ -42,6 +43,7 @@ public class AppUsersDAO extends DAO {
 			System.out.println("INSIDE THE registerUser METHOD");
 			getSession().save(user);
 			commit();
+			close();
 			return user;
 		}catch(HibernateException e){
 			rollback();

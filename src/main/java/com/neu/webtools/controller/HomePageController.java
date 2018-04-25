@@ -87,7 +87,7 @@ public class HomePageController {
 					
 					// Checking for the appropriate role and rendering the appropriate page
 					if(users.getRole().getRole_name().equalsIgnoreCase("employer")) {
-						return new ModelAndView( "employeer-home", "user",users);
+						return new ModelAndView( "employeer-home", "name",users);
 					}else if(users.getRole().getRole_name().equalsIgnoreCase("student")) {
 						return new ModelAndView( "student-home", "name", users);
 					}else {

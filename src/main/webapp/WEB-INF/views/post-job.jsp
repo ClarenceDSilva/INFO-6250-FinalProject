@@ -21,10 +21,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<%--     <link rel="stylesheet" href="${contextPath}/font-awesome-4.7.0/css/font-awesome.min.css"> --%>
     <link href="https://fonts.googleapis.com/css?family=Bungee|Abril+Fatface" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/homecss.css" >
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/headerandfooter.css">
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/postAJob.css">
@@ -72,26 +72,28 @@
         <header class="header">
             <div class="row">
                 <div class="menu_main col-xs-4" style="background-color:#35404f;">
-                    <h4 class="menu_main_logo"><i class="fa fa-university" aria-hidden="true"> NU CAREERS</i></h4>
-                    <h1>Hello , ${user}</h1>
-                    
+                    <h4 class="menu_main_logo"><i class="fa fa-university" aria-hidden="true"> NU CAREERS<br/><p>Hello , ${user}</p></i></h4>
+
                 </div>
                 <div class="menu_main_content col-xs-8">
                     <div class = "dropdown">
                         <div class="col-xs-3 droplink" style="background-color:#35404f;" ><a href="#" style="color: lightblue; text-decoration:none" id="dropdownMenu1" data-toggle="dropdown">Accounts <span class="caret"></span></a>
                             <div class="dropdown-content">
                                 <a href="#">Edit Profile </a>
-                                <a href="login.htm?action=logout">Logout</a>
+                                <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
                     <div class="col-xs-3" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Post a Job</a></div>
                     <div class="col-xs-3" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">View Applications</a></div>
                 </div>
             </div>
-        </header>
-        <div class="alert alert-success alert-dismissable">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">X</a>
-        <strong>Job Posted Successfully!</strong>
-    </div>
+        </header>	
+		  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+		  <strong>${errorMessage}</strong>
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		    X
+		  </button>
+		</div>
+		
     <div class="jumbotron">
         <h1 id="myHeader">POST A JOB</h1>
         <h2>Find the right person for your company</h2>
@@ -101,7 +103,12 @@
         <p>Fields marked by an Asterisk <span>&#42;</span> are required</p>
     </div>
     <div class="grid-2-6">
-        <form class ="jobform" method="post" action = "${contextPath}/employeer/postjobsuccess.htm?user=${user}">
+        <form class ="jobform" method="post" action = "${contextPath}/employeer/postjobsuccess.htm?name=${user}">
+        <div id="div-jobId" class="error-wrap title">
+            <label for="job_title">Job ID <span class="asterisk">&#42;</span></label><br>
+        <input placeholder="Job Title" maxlength="50" required="required" size="50" type="text" name="job_id" id="job_id">
+        </div><br>
+        
         <div id="div-jobTitle" class="error-wrap title">
             <label for="job_title">Job Title <span class="asterisk">&#42;</span></label><br>
         <input placeholder="Job Title" maxlength="85" required="required" size="50" type="text" name="jobtitle" id="job_title">
@@ -116,22 +123,22 @@
             <div class="row-of-radio">
                 <h3>Job Type <span class="asterisk">&#42;</span></h3>
                 <div>
-                    <input required="required" type="radio" value="full" name="job_type" id="job_type_full">
+                    <input required="required" type="radio" value="Full Time" name="job_type" id="job_type_full">
                     <label for="job_type_full">Full Time</label>
                 </div>
 
                 <div>
-                    <input required="required" type="radio" value="coop" name="job_type" id="job_type_coop">
+                    <input required="required" type="radio" value="Co-op" name="job_type" id="job_type_coop">
                     <label for="job_type_coop">Co-op</label>
                 </div>
 
                 <div>
-                    <input required="required" type="radio" value="contract" name="job_type" id="job_type_contract">
+                    <input required="required" type="radio" value="Contract" name="job_type" id="job_type_contract">
                     <label for="job_type_contract">Contract</label>
                 </div>
 
                 <div>
-                    <input required="required" type="radio" value="oncampus" name="job_type" id="job_type_oncampus">
+                    <input required="required" type="radio" value="On Campus" name="job_type" id="job_type_oncampus">
                     <label for="job_type_oncampus">On Campus</label>
                 </div>
             </div>
@@ -187,7 +194,7 @@
                     <input type="radio" value="full" name="job_desc" id="job_desc_onhere">
                     <label for="job_desc_onhere">Post Job Description Here</label>
                     <div class="markItUpContainer">
-                        <textarea rows="10" cols="40" placeholder="Describe the job briefly" class="textarea-markItUpHeader" name= "job[description]"
+                        <textarea rows="10" cols="40" placeholder="Describe the job briefly" class="textarea-markItUpHeader" name= "job_description"
                         id="job_description" spellcheck="true" style="z-index: auto; position: relative"; font-size: 19px;></textarea>
 
                     </div>
@@ -202,9 +209,7 @@
         <div><br></div>
     </div>
 </div>
-        
-        </div>
      <jsp:include page="footer.jsp" />  
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> 
 </body></html>

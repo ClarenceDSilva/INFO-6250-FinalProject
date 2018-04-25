@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +23,7 @@ public class AppUsers {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name = "USER_ID", unique = true, nullable = false)//name of the primary key generator
+	@Column(name = "userid", unique = true, nullable = false)//name of the primary key generator
 	//@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "role")) //So that value in roleId be same as value in userid of the usertable
 	private int userid;
 	
@@ -38,14 +40,14 @@ public class AppUsers {
 	private String password;
 	
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "ROLE_ID_FK")
+	@JoinColumn(name = "roleId")
 	private Role role;
 	
 	@Column(name = "EMAIL")
 	private String email;
 	
-	/*@OneToMany(mappedBy = "user")
-	private List<JobDetails> jobDetails = new ArrayList<JobDetails>();*/
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<JobDetails> jobDetails = new ArrayList<JobDetails>();
 	
 	
 	public void setUserid(int userid) {
@@ -81,12 +83,12 @@ public class AppUsers {
 	public String getEmail() {
 		return email;
 	}
-	/*public List<JobDetails> getJobDetails() {
+	public List<JobDetails> getJobDetails() {
 		return jobDetails;
 	}
 	public void setJobDetails(List<JobDetails> jobDetails) {
 		this.jobDetails = jobDetails;
-	}*/
+	}
 	public void setEmail(String email) {
 		this.email = email;
 	}

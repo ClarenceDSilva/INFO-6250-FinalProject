@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,21 +16,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import org.hibernate.annotations.Parameter;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "ROLE")
-@PrimaryKeyJoinColumn(name = "ROLE_ID_PK")
+@Table(name = "role")
 public class Role {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
+	@Column(name = "roleId", unique = true, nullable = false)
 	private int roleId;
 
 	@Column(name = "ROLE_NAME")
 	private String role_name;
 
 	
-	@OneToMany(cascade = CascadeType.MERGE)
+	@OneToMany(mappedBy = "role",fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private List<AppUsers> user = new ArrayList<AppUsers>();
 
 	public int getRoleId() {

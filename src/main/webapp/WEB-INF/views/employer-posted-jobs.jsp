@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Employeer-Home</title>
+<title>Jobs Posted</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
@@ -26,15 +26,9 @@
 <link rel="stylesheet"href="css/footer.css"type="text/css" />
 <link rel="stylesheet"href="css/home.css" type="text/css" />
 <%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/homecss.css" >	
- --%><link  rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css" type="text/css" />
+ --%><link  rel="stylesheet" href="css/header.css" type="text/css" />
 <%-- <link  rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css" type="text/css" /> --%>
 
-<script>
-	$(document).ready(function(){
-		 $(".alert").hide();
-		
-		});
-</script>
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -53,16 +47,72 @@
                                 <a href="#">Edit Profile </a>
                                 <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
-                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employeer/postjob.htm?name=${name.fname}" style="color: lightblue; text-decoration:none">Post a Job</a></div>
-                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employer/myjobposts.htm" style="color: lightblue; text-decoration:none">View my Posts</a></div>
+                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employeer/postjob.htm?user=${name.fname}" style="color: lightblue; text-decoration:none">Post a Job</a></div>
+                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employer/myjobposts.htm " style="color: lightblue; text-decoration:none">View my Posts</a></div>
                 </div>
             </div>
         </header>	
-         <input type="hidden" value= "${name}" name = "userText"></input>
+        <%--  <input type="hidden" value= "${name.fname}" name = "userText"></input>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
 		  <strong>${successMessage}</strong>
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> X </button>
+		</div> --%>
+		<div>
+			<center><h2>Here are the jobs you have posted</h2></center>
+			<table class = "table">
+				<c:forEach var="j" items="${jobPost}">
+					<tr>
+						<td><b>Job ID</b></td>
+						<td>${j.jobID}</td>
+					</tr>
+					<tr>
+						<td><b>Title</b></td>
+						<td>${j.jobTitle}</td>
+					</tr>
+					<tr>
+						<td><b>Company Name</b></td>
+						<td>${j.companyName}</td>
+					</tr>
+					<tr>
+						<td><b>Job Type</b></td>
+						<td>${j.jobType}</td>
+					</tr>
+					<tr>
+						<td><b>Location</b></td>
+						<td>${j.state}, ${j.country}</td>
+					</tr>
+					<tr>
+						<td><b>Industry</b></td>
+						<td>${j.industry}</td>
+					</tr>
+					<tr>
+						<td><b>Job For</b></td>
+						<td>${j.major}</td>
+					</tr>
+					<tr>
+						<td><b>Job-URL</b></td>
+						<c:if test= "${empty j.jobUrl}"> 
+						<td>No link available. Please check the company's website</td></c:if>
+						<c:if test= "${not empty j.jobUrl}"> 
+						<td>${j.jobUrl}</td></c:if>
+					</tr>
+					<tr>
+						<td><b>Description</b></td>
+						<c:if test= "${empty j.description}"> 
+						<td>No description provided</td></c:if>
+						<c:if test= "${not empty j.description}"> 
+						<td>${j.description}</td></c:if>
+					</tr>
+						<td><b>Posted On</b></td>
+						<td>${j.postedOn}</td>
+					</tr>
+					<tr><td><a href="">Update this job post</a></td>&nbsp<td><a href="">View candidates who have applied</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="">Delete Post</a></td></tr>
+					<br><br>
+				</c:forEach>
+			
+			</table>
 		</div>
+		
         </div>
         <div><br><br></div>
        

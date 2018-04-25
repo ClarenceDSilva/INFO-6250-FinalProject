@@ -35,6 +35,7 @@
                             </div></div></div>
                     <div class="col-xs-4" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Apply for jobs</a></div>
                     <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">View applied jobs</a></div>
+                     <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Github jobs</a></div>
                 </div>
             </div>
         </header>
