@@ -24,7 +24,7 @@ public class JobDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Id", unique=true, nullable = false)
-	private long Id;
+	private long id;
 	
 	@Column(name = "jobID")
 	private String jobID;
@@ -63,11 +63,12 @@ public class JobDetails {
 	@Temporal(TemporalType.DATE)
 	private Date postedOn;
 	
+	
 	public long getId() {
-		return Id;
+		return id;
 	}
 	public void setId(long id) {
-		Id = id;
+		this.id = id;
 	}
 	public String getJobID() {
 		return jobID;

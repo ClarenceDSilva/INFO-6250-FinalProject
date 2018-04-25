@@ -11,10 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -23,8 +21,7 @@ public class AppUsers {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userid", unique = true, nullable = false)//name of the primary key generator
-	//@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "role")) //So that value in roleId be same as value in userid of the usertable
+	@Column(name = "userid", unique = true, nullable = false)
 	private int userid;
 	
 	@Column(name = "FIRSTNAME")

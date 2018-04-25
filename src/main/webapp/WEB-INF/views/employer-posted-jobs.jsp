@@ -59,8 +59,11 @@
 		</div> --%>
 		<div>
 			<center><h2>Here are the jobs you have posted</h2></center>
+			<form action = "${contextPath}/employer/deleteMyJobposts.htm" method="get">
 			<table class = "table">
 				<c:forEach var="j" items="${jobPost}">
+				
+          		<input type="hidden" name = "jobID" value = "${j.id}" />
 					<tr>
 						<td><b>Job ID</b></td>
 						<td>${j.jobID}</td>
@@ -106,14 +109,35 @@
 						<td><b>Posted On</b></td>
 						<td>${j.postedOn}</td>
 					</tr>
-					<tr><td><a href="">Update this job post</a></td>&nbsp<td><a href="">View candidates who have applied</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="">Delete Post</a></td></tr>
+					<tr><td><a href="">Update this job post</a></td>&nbsp<td><a href="">View candidates who have applied</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Delete Post</button>
+					</td>
 					<br><br>
 				</c:forEach>
 			
-			</table>
-		</div>
-		
+			
+			<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Warning: Delete Post?</h4>
         </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this post? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer">
+          
+          <button type="submit" class="btn btn-danger btn-lg">Yes</button>
+        
+          <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">No</button>
+                  </div>
+    
+           </table></form>
+
+  </div>
         <div><br><br></div>
        
      <jsp:include page="footer.jsp" /> 

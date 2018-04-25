@@ -45,5 +45,21 @@ public class EmployerDAO extends DAO {
 			throw new JobsPostedException("Could not find any posts for you!", e);
 		}
 	}
+	
+	//Method for deleting Job Post
+	public boolean delete(long jobid) throws JobsPostedException{
+		try {
+			begin();
+			Query query = getSession().createQuery("delete from JobDetails where id = '" + jobid + "' ");
+			System.out.println("Inside EMPLOYEER DAO delete method");
+			query.executeUpdate();
+			commit();
+			close();
+			return true;
+		}catch(HibernateException e) {
+			rollback();
+			throw new JobsPostedException("Error in deleting the job post", e);
+		}
+	}
 }
 

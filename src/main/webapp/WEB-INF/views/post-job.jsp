@@ -103,7 +103,7 @@
         <p>Fields marked by an Asterisk <span>&#42;</span> are required</p>
     </div>
     <div class="grid-2-6">
-        <form class ="jobform" method="post" action = "${contextPath}/employeer/postjobsuccess.htm?name=${user}">
+        <form class ="jobform" method="post" action = "${contextPath}/employer/postjobsuccess.htm?name=${user}">
         <div id="div-jobId" class="error-wrap title">
             <label for="job_title">Job ID <span class="asterisk">&#42;</span></label><br>
         <input placeholder="Job Title" maxlength="50" required="required" size="50" type="text" name="job_id" id="job_id">

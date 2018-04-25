@@ -13,6 +13,7 @@ public class RoleDAO extends DAO {
 			Query query = getSession().createQuery("from Role where role_name = :role_name");
 			query.setString("role_name", role_name);
 			Role role = (Role) query.uniqueResult();
+			close();
 			System.out.println("User belongs to the ROLE"+role);
 			return role;
 		}catch(HibernateException e){

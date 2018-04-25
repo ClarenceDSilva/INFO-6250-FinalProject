@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +35,7 @@ public class EmployeeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "employeer/postjobsuccess.htm", method = RequestMethod.POST)
+	@RequestMapping(value = "employer/postjobsuccess.htm", method = RequestMethod.POST)
 	public ModelAndView postAJob(HttpServletRequest request, EmployerDAO employerDao, ModelMap map, AppUsers users) {
 		String jobId = request.getParameter("job_id");
 		String title = request.getParameter("jobtitle");
@@ -94,6 +96,30 @@ public class EmployeeController {
 			System.out.println(e.getMessage());
 			return new ModelAndView("errors", "errorMessage", "Error occured while displaying your posteds jobs");
 		}
+	}
+	
+	@RequestMapping(value = "/employer/deleteMyJobposts.htm", method = RequestMethod.GET)
+	public ModelAndView deleteJobPost(HttpServletRequest request, EmployerDAO employerDao) {
+		System.out.println("INSIDE deleteJobPost CONTROLLER METHOD");
+		HttpSession session = (HttpSession) request.getSession();
+		String jobId = request.getParameter("jobID");
+		try {
+		if(jobId.equals(null)) {
+			System.out.println("No Id found to delete the job post");
+		}else {
+		session.setAttribute("jobId", jobId);
+		
+		
+			System.out.println("JOB ID " +jobId);
+			long id = Long.parseLong(jobId);
+			employerDao.delete(id);
+			}
+		return new ModelAndView("delete-success");	
+		}catch(JobsPostedException e) {
+			System.out.println(e.getMessage());
+			return new ModelAndView("errors", "errorMessage", "Error occured while deleting the job post");
+		}
+		
 	}
 }
 
