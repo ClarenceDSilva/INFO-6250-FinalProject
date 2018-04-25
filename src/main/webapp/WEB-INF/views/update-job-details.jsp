@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Update Job</title>
+</head>
+<body>
+	<html>
 <head>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -15,14 +21,10 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous"></script>
 	
-<link  rel="stylesheet" href="css/header.css" type="text/css" />
-<link  rel="stylesheet" href="css/footer.css" type="text/css" />
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Bungee|Abril+Fatface" rel="stylesheet">
-<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
     
     <link rel="stylesheet" type="text/css" href="${contextPath}/css/homecss.css" >
@@ -72,7 +74,7 @@
         <header class="header">
             <div class="row">
                 <div class="menu_main col-xs-4" style="background-color:#35404f;">
-                    <h4 class="menu_main_logo"><i class="fa fa-university" aria-hidden="true"> NU CAREERS<br/><p>Hello , ${name.fname}</p></i></h4>
+                    <h4 class="menu_main_logo"><i class="fa fa-university" aria-hidden="true"> NU CAREERS<br/><p>Hello , ${name}</p></i></h4>
 
                 </div>
                 <div class="menu_main_content col-xs-8">
@@ -95,15 +97,15 @@
 		</div>
 		
     <div class="jumbotron">
-        <h1 id="myHeader">POST A JOB</h1>
-        <h2>Find the right person for your company</h2>
+        <h1 id="myHeader">UPDATE JOB</h1>
+        <h2>Having second thoughts about your post? Update it below</h2>
     </div>
 
     <div class="disclaimer">
         <p>Fields marked by an Asterisk <span>&#42;</span> are required</p>
     </div>
     <div class="grid-2-6">
-        <form class ="jobform" method="post" action = "${contextPath}/employer/postjobsuccess.htm?name=${name}">
+        <form class ="jobform" method="post" commandName = "jobdetails" action = "${contextPath}/employer/updateJobDetails.htm?name=${name}">
         <div id="div-jobId" class="error-wrap title">
             <label for="job_title">Job ID <span class="asterisk">&#42;</span></label><br>
         <input placeholder="Job Title" maxlength="50" required="required" size="50" type="text" name="job_id" id="job_id">
@@ -203,7 +205,7 @@
             </div>
     </div>
         <div style="text-align:center;">
-        	<input type = "submit" class="btn btn-success btn-lg" value = "Post" />
+        	<input type = "submit" class="btn btn-success btn-lg" value = "Update" />
         </div>
         </form>
         <div><br></div>
@@ -213,3 +215,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> 
 </body></html>
+</body>
+</html>

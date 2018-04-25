@@ -47,8 +47,8 @@
                                 <a href="#">Edit Profile </a>
                                 <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
-                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employeer/postjob.htm?user=${name.fname}" style="color: lightblue; text-decoration:none">Post a Job</a></div>
-                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employer/myjobposts.htm " style="color: lightblue; text-decoration:none">View my Posts</a></div>
+                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employeer/postjob.htm?name=${name}" style="color: lightblue; text-decoration:none">Post a Job</a></div>
+                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employer/myjobposts.htm" style="color: lightblue; text-decoration:none">View my Posts</a></div>
                 </div>
             </div>
         </header>	
@@ -109,7 +109,7 @@
 						<td><b>Posted On</b></td>
 						<td>${j.postedOn}</td>
 					</tr>
-					<tr><td><a href="">Update this job post</a></td>&nbsp<td><a href="">View candidates who have applied</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Delete Post</button>
+					<tr><td><a href="${contextPath}/employer/updateJobDetails.htm?jobID=${j.id}&name=${name.fname}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update Post</a></td><td><a href="#" class="btn btn-dark btn-lg active" role="button" aria-pressed="true">View candidates</a></td><td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Delete Post</button>
 					</td>
 					<br><br>
 				</c:forEach>
@@ -126,7 +126,7 @@
           <h4 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Warning: Delete Post?</h4>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to delete this post? This action cannot be undone.</p>
+          <p>Are you sure you want to delete this job post? This action cannot be undone.</p>
         </div>
         <div class="modal-footer">
           
@@ -136,7 +136,7 @@
                   </div>
     
            </table></form>
-
+</div>
   </div>
         <div><br><br></div>
        

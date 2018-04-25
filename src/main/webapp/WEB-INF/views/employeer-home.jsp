@@ -53,7 +53,7 @@
                                 <a href="#">Edit Profile </a>
                                 <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
-                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employeer/postjob.htm?name=${name.fname}" style="color: lightblue; text-decoration:none">Post a Job</a></div>
+                    <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employeer/postjob.htm?name=${name}" style="color: lightblue; text-decoration:none">Post a Job</a></div>
                     <div class="col-xs-3" style="background-color:#35404f;"><a href="${contextPath}/employer/myjobposts.htm" style="color: lightblue; text-decoration:none">View my Posts</a></div>
                 </div>
             </div>

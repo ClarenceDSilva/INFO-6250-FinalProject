@@ -61,5 +61,48 @@ public class EmployerDAO extends DAO {
 			throw new JobsPostedException("Error in deleting the job post", e);
 		}
 	}
+	
+	//Method for fetching the id to update the job post
+	public JobDetails updateJobPost(long jobid) throws JobsPostedException{
+		try {
+			begin();
+			Query query = getSession().createQuery("from JobDetails where id = '" + jobid + "' ");
+			System.out.println("INSIDE EMPLOYER DAO update method");
+			JobDetails jobdetails = (JobDetails) query.uniqueResult();
+			commit();
+			close();
+			return jobdetails;
+		}catch(HibernateException e) {
+			rollback();
+			throw new JobsPostedException("Could not update the job at the DAO level", e);
+		}
+	}
+	
+	//Method for updating the job post
+	public JobDetails onClickUpdateJobPost(JobDetails jobdetails, long newJobid) throws JobsPostedException{
+		try {
+			begin();
+			String jobid = jobdetails.getJobID();
+			String title = jobdetails.getJobTitle();
+			String company = jobdetails.getCompanyName();
+			String jobType = jobdetails.getJobType();
+			String country = jobdetails.getCountry();
+			String state = jobdetails.getState();
+			String industry = jobdetails.getIndustry();
+			String major = jobdetails.getMajor();
+			String url = jobdetails.getJobUrl();
+			String description = jobdetails.getDescription();
+			
+			Query query = getSession().createQuery("update JobDetails set jobID ='" + jobid + "' , jobTitle ='" + title + "', companyName = '" + company + "', jobType = '" + jobType + "', country = '" + country + "', state = '" + state + "', industry = '" + industry + "', major = '" + major + "', jobUrl = '" + url + "', description = '" + description + "' where id = '" + newJobid + "' ");
+			System.out.println("INSIDE EMPLOYER DAO onClickUpdateJobPost METHOD ");
+			query.executeUpdate();
+			commit();
+			close();
+			return jobdetails;
+		}catch(HibernateException e) {
+			rollback();
+			throw new JobsPostedException("Error occured while updating the job at the DAO Level", e);
+		}
+	}
 }
 
