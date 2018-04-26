@@ -53,14 +53,13 @@
                                 <a href="#">Edit Profile </a>
                                 <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
-                     <div class="col-xs-4" style="background-color:#35404f;"><a href="${contextPath}/student/viewalljobs.htm?name=${name}" style="color: lightblue; text-decoration:none">View all jobs</a></div>       
-                    <div class="col-xs-4" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Apply for jobs</a></div>
+                     <div class="col-xs-4" style="background-color:#35404f;"><a href="${contextPath}/student/viewalljobs.htm?name=${name}" style="color: lightblue; text-decoration:none">View all jobs</a></div>
                     <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">View my applied jobs</a></div>
                      <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Github jobs</a></div>
                 </div>
             </div>
         </header>	
-         <input type="hidden" value= "${name}" name = "userText"></input>
+         <%-- <input type="hidden" value= "${name}" name = "userText"></input> --%>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
 		  <strong>${successMessage}</strong>
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> X </button>
@@ -69,7 +68,7 @@
 		<table class = "table">
 				<c:forEach var="j" items="${allJobs}">
 				
-          		<input type="hidden" name = "jobID" value = "${j.id}" />
+          		<%-- <input type="hidden" name = "jobID" value = "${j.id}" /> --%>
 					<tr>
 						<td><b>Job ID</b></td>
 						<td>${j.jobID}</td>
@@ -115,7 +114,7 @@
 						<td><b>Posted On</b></td>
 						<td>${j.postedOn}</td>
 					</tr>
-					<tr><td></td><td><a href="${contextPath}/employer/updateJobDetails.htm?jobID=${j.id}&name=${name.fname}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Apply for this job</a></td></tr>
+					<tr><td></td><td><a href="${contextPath}/student/showUploadPage.htm?jobID=${j.id}&name=${name.fname}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Apply for this job</a></td></tr>
 					<br>
 				</c:forEach>
 				</table>

@@ -10,17 +10,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * @author clarence
+ *This class creates POJO objects for storing the uploaded Resumes/CV's and 
+ *cover letters into the database
+ */
+
 @Entity
 @Table(name = "JOB_APPLICATIONS")
 public class JobApplication {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "Id", unique=true, nullable = false)
+	@Column(name = "FILE_ID", unique=true, nullable = false)
 	private long id;
 	
+	@Column(name = "FILE_NAME", length = 100)
 	private String fileName;
-	
+	@Column(name = "FILE_DATA", length = 1000000000)
 	private byte[] data;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
@@ -30,7 +36,7 @@ public class JobApplication {
 	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "jobid")
 	private JobDetails jobdetails;
-
+	
 	public long getId() {
 		return id;
 	}
@@ -39,7 +45,6 @@ public class JobApplication {
 		this.id = id;
 	}
 	
-	@Column(name = "FILE_NAME")
 	public String getFileName() {
 		return fileName;
 	}
@@ -48,7 +53,6 @@ public class JobApplication {
 		this.fileName = fileName;
 	}
 	
-	@Column(name = "FILE_DATA")
 	public byte[] getData() {
 		return data;
 	}

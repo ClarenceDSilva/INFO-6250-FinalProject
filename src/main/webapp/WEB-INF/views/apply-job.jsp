@@ -18,9 +18,7 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
 
 	<!-- Custom CSS -->
 <link rel="stylesheet"href="css/footer.css"type="text/css" />
@@ -47,8 +45,7 @@
                                 <a href="#">Edit Profile </a>
                                 <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
-                     <div class="col-xs-4" style="background-color:#35404f;"><a href="${contextPath}/student/viewalljobs.htm?name=${name}" style="color: lightblue; text-decoration:none">View all jobs</a></div>       
-                    <div class="col-xs-4" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Apply for jobs</a></div>
+                     <div class="col-xs-4" style="background-color:#35404f;"><a href="${contextPath}/student/viewalljobs.htm?name=${name}" style="color: lightblue; text-decoration:none">View all jobs</a></div>
                     <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">View my applied jobs</a></div>
                      <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Github jobs</a></div>
                 </div>
@@ -59,24 +56,27 @@
         <div><br><br></div>
         
         <div align="center">
-        <h1>Candidate Job Apply</h1>
-        <form method="post" action="doUpload" enctype="multipart/form-data">
+        <h1>Candidate ${name.fname}'s, Application</h1><br>
+         <h3>Please upload the following files:</h3>
+         <p>(Files should not exceed beyond 20 MB)</p>
+        <br><br>
+        <form method="post" action="${contextPath}/student/apply.htm?name=${name}&jobID=${j}" enctype="multipart/form-data">
             <table border="0">
                 <tr>
-                    <td>Upload Resume/CV (File should not exceed more than 5 MB)</td>
+                    <td><b>Resume/CV</b> </td>
                     <td><input type="file" name="fileUpload" size="50" /></td>
                 </tr>
+                <tr></tr>
                 <tr>
-                    <td>Upload Cover Letter: (File should not exceed more than 5 MB)</td>
+                    <td><b>Cover Letter:</b></td>
                     <td><input type="file" name="fileUpload" size="50" /></td>
                 </tr>
-                <tr>
-                    <td colspan="2" align="center"><input type="submit" value="Upload" /></td>
-                </tr>
-            </table>
+                <tr></tr></table><br><br>
+                <input type="submit" class="btn btn-success btn-lg" value="Apply" />
+            
         </form>
     </div>
-        
+     <br><br>   
        
      <jsp:include page="footer.jsp" /> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

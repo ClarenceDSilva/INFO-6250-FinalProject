@@ -16,5 +16,6 @@
 		<mapping class="com.neu.webtools.pojo.AppUsers"/>
 		<mapping class="com.neu.webtools.pojo.Role"/>
 		<mapping class="com.neu.webtools.pojo.JobDetails"/>
+		<mapping class="com.neu.webtools.pojo.JobApplication"/>
 	</session-factory>
 </hibernate-configuration>  
