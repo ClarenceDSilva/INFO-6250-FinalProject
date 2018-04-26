@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>view-jobs</title>
+<title>applied jobs</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
@@ -18,9 +18,7 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/07b0ce5d10.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
 
 	<!-- Custom CSS -->
 <link rel="stylesheet"href="css/footer.css"type="text/css" />
@@ -29,16 +27,6 @@
 <link  rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css" type="text/css" />
 <link  rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css" type="text/css" />
 
-<script>
-	$(document).ready(function(){
-		 $(".alert").hide();
-
-		 if (window.location.href.indexOf("?jobID=") > -1) {
-			    $(".alert").show();
-			}
-		
-		});
-</script>
 </head>
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -47,7 +35,7 @@
         <header class="header">
             <div class="row">
                 <div class="menu_main col-xs-4" style="background-color:#35404f;">
-                    <h4 class="menu_main_logo"><i class="fa fa-university" aria-hidden="true"> NU CAREERS<br/><p>Hello, ${name.fname}</p></i></h4>
+                    <h4 class="menu_main_logo"><i class="fa fa-university" aria-hidden="true"> NU CAREERS<br/><p>Hello , ${name.fname}</p></i></h4>
 
                 </div>
                 <div class="menu_main_content col-xs-10">
@@ -63,68 +51,14 @@
                 </div>
             </div>
         </header>	
-         <%-- <input type="hidden" value= "${name}" name = "userText"></input> --%>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-		  <strong>Congratulations!! You have successfully applied for ${jobID.companyName}.</strong> If you are deemed as the right candidate by the company, you will be contacted on the email you have provided
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> X </button>
-		</div>
-		<center><h2>Open Job Listings</h2></center>
-		<table class = "table">
-				<c:forEach var="j" items="${allJobs}">
-				
-          		<%-- <input type="hidden" name = "jobID" value = "${j.id}" /> --%>
-					<tr>
-						<td><b>Job ID</b></td>
-						<td>${j.jobID}</td>
-					</tr>
-					<tr>
-						<td><b>Title</b></td>
-						<td>${j.jobTitle}</td>
-					</tr>
-					<tr>
-						<td><b>Company Name</b></td>
-						<td>${j.companyName}</td>
-					</tr>
-					<tr>
-						<td><b>Job Type</b></td>
-						<td>${j.jobType}</td>
-					</tr>
-					<tr>
-						<td><b>Location</b></td>
-						<td>${j.state}, ${j.country}</td>
-					</tr>
-					<tr>
-						<td><b>Industry</b></td>
-						<td>${j.industry}</td>
-					</tr>
-					<tr>
-						<td><b>Job For</b></td>
-						<td>${j.major}</td>
-					</tr>
-					<tr>
-						<td><b>Job-URL</b></td>
-						<c:if test= "${empty j.jobUrl}"> 
-						<td>No link available. Please check the company's website</td></c:if>
-						<c:if test= "${not empty j.jobUrl}"> 
-						<td>${j.jobUrl}</td></c:if>
-					</tr>
-					<tr>
-						<td><b>Description</b></td>
-						<c:if test= "${empty j.description}"> 
-						<td>No description provided</td></c:if>
-						<c:if test= "${not empty j.description}"> 
-						<td>${j.description}</td></c:if>
-					</tr>
-						<td><b>Posted On</b></td>
-						<td>${j.postedOn}</td>
-					</tr>
-					<tr><td></td><td><a href="${contextPath}/student/showUploadPage.htm?jobID=${j.id}&name=${name.fname}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Apply for this job</a></td></tr>
-					<br>
-				</c:forEach>
-				</table>
-		
+         <input type="hidden" value= "${name}" name = "userText"></input>
         </div>
         <div><br><br></div>
+        
+        <div align="center">
+        <h1>Your Applications</h1><br>
+    </div>
+     <br><br>   
        
      <jsp:include page="footer.jsp" /> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>

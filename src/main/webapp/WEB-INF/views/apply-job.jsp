@@ -60,7 +60,7 @@
          <h3>Please upload the following files:</h3>
          <p>(Files should not exceed beyond 20 MB)</p>
         <br><br>
-        <form method="post" action="${contextPath}/student/apply.htm?name=${name}&jobID=${j}" enctype="multipart/form-data">
+        <form method="post" action="${contextPath}/student/apply.htm?jobID=${j}&name=${name}" enctype="multipart/form-data">
             <table border="0">
                 <tr>
                     <td><b>Resume/CV</b> </td>
