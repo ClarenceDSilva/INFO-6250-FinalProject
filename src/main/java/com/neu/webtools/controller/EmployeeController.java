@@ -27,7 +27,6 @@ public class EmployeeController {
 		ModelAndView mav = new ModelAndView();
 		AppUsers appUsers = (AppUsers) request.getSession().getAttribute("name");
 		//String name = request.getParameter("name");
-
 		//System.out.println(name);
 		request.getSession().setAttribute("name", appUsers);
 		mav.setViewName("post-job");
@@ -93,7 +92,7 @@ public class EmployeeController {
 			return new ModelAndView("employer-posted-jobs", "jobPost", jobPost);
 		} catch (JobsPostedException e) {
 			System.out.println(e.getMessage());
-			return new ModelAndView("errors", "errorMessage", "Error occured while displaying your posteds jobs");
+			return new ModelAndView("errors", "errorMessage", "Error occured while displaying your posted jobs");
 		}
 	}
 

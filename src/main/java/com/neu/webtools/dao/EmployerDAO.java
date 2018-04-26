@@ -104,5 +104,6 @@ public class EmployerDAO extends DAO {
 			throw new JobsPostedException("Error occured while updating the job at the DAO Level", e);
 		}
 	}
+	
 }
 

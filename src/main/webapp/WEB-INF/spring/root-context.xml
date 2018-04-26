@@ -7,5 +7,6 @@
 	<bean name="appUsersDao" class="com.neu.webtools.dao.AppUsersDAO" scope="request"/>
 	<bean name="roleDao" class="com.neu.webtools.dao.RoleDAO" scope="request"/>
 	<bean name="employerDao" class="com.neu.webtools.dao.EmployerDAO" scope="request"/>	
+	<bean name="studentDao" class="com.neu.webtools.dao.StudentDAO" scope="request"/>	
 		
 </beans>
