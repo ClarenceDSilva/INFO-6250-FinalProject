@@ -16,6 +16,11 @@
   color: green;
 }
 
+body{
+	background-image: url("/images/bg.jpg");	
+}
+
+
 
 .menu_main {
     height: 90px;

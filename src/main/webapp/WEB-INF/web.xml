@@ -9,6 +9,12 @@
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
 	
+	<!-- To prevent XSS attacks in all form pages -->
+	<context-param>
+    <param-name>defaultHtmlEscape</param-name>
+    <param-value>true</param-value>
+	</context-param>
+	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -38,6 +44,11 @@
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	
+		<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
 	</servlet-mapping>
 
 </web-app>

@@ -36,14 +36,33 @@
 		if (window.location.href.indexOf("/register.htm") > -1) {
 				$("div.alert").show();
 			}
-		
 
-		$("div.submit-login").click(function() {
-			console.log("alert displayed")
-			$("div.alert").show();
-		});
+		if (window.location.href.indexOf("/login.htm") > -1) {
+				$("div.alert").show();
+			}
 	});
 </script>
+<style>
+body {
+    background-image:  url('${pageContext.request.contextPath}/images/job.jpg');
+    background-repeat: no-repeat, repeat center center fixed;
+    -webkit-background-size: cover;
+  	-moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-color: #cccccc;
+}
+h1, input{
+	
+}
+
+.homepage{
+	
+	background-color: lightblue;
+}
+</style>
+
+
 </head>
 
 <body>
