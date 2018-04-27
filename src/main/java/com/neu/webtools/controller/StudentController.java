@@ -67,7 +67,7 @@ public class StudentController {
 	@RequestMapping(value = "student/apply.htm", method = RequestMethod.POST)
 	public ModelAndView handleFileUpload(HttpServletRequest request, StudentDAO studentDao,
 			@RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
-		//boolean token = true;
+		boolean token = true;
 		List<JobDetails> jd = new ArrayList<JobDetails>();
 		// Fetching JobDetails and AppUsers object from the session
 		JobDetails jobdetails = (JobDetails) request.getSession().getAttribute("jobID");
@@ -76,10 +76,10 @@ public class StudentController {
 		//System.out.println("ISEIZE" + list.size());
 
 		try {
-			/*token = studentDao.userExists(appUsers, jobdetails);
+			token = studentDao.userExists(appUsers, jobdetails);
 			if(token == true) {
 				return new ModelAndView("errors", "errorMessage","You have already applied for this job");
-			}else {*/
+			}else {
 			request.getSession().setAttribute("name", appUsers);
 			request.getSession().setAttribute("JobID", jobdetails);
 			if (fileUpload != null && fileUpload.length > 0) {
@@ -92,7 +92,7 @@ public class StudentController {
 					uploadFile.setJobdetails(jobdetails);
 					studentDao.saveFiles(uploadFile);
 				}
-			}
+			}}
 			jd.add(jobdetails);
 			request.getSession().setAttribute("jobList", jd);
 			return new ModelAndView("view-jobs");

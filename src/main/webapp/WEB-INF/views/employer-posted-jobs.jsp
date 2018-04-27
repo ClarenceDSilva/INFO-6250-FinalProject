@@ -109,7 +109,7 @@
 						<td><b>Posted On</b></td>
 						<td>${j.postedOn}</td>
 					</tr>
-					<tr><td><a href="${contextPath}/employer/updateJobDetails.htm?jobID=${j.id}&name=${name.fname}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update Post</a></td><td><a href="#" class="btn btn-dark btn-lg active" role="button" aria-pressed="true">View candidates</a></td><td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Delete Post</button>
+					<tr><td><a href="${contextPath}/employer/updateJobDetails.htm?jobID=${j.id}&name=${name.fname}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Update Post</a></td><td><a href="${contextPath}/employer/viewCandidatesApplied?jobID=${j.id}&name=${name.fname}" class="btn btn-dark btn-lg active" role="button" aria-pressed="true">View candidates</a></td><td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Delete Post</button>
 					</td>
 					<br><br>
 				</c:forEach>

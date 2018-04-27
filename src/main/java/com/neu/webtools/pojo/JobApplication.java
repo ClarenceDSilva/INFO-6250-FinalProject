@@ -30,11 +30,11 @@ public class JobApplication {
 	@Column(name = "FILE_DATA", length = 1000000000)
 	private byte[] data;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "userid")
 	private AppUsers user;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "jobId")
 	private JobDetails jobdetails;
 	

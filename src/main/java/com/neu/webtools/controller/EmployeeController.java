@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.neu.webtools.dao.EmployerDAO;
 import com.neu.webtools.exception.JobsPostedException;
 import com.neu.webtools.pojo.AppUsers;
+import com.neu.webtools.pojo.JobApplication;
 import com.neu.webtools.pojo.JobDetails;
 
 @Controller
@@ -185,5 +186,32 @@ public class EmployeeController {
 		}
 		return null;
 		
+	}
+	
+	@RequestMapping(value = "/employer/viewCandidatesApplied", method = RequestMethod.GET)
+	public ModelAndView listCandidatesApplied(HttpServletRequest request,EmployerDAO employerDao) {
+			AppUsers appUsers = (AppUsers) request.getSession().getAttribute("name");
+			HttpSession session = request.getSession();
+			String id = request.getParameter("jobID");
+			session.setAttribute("id", id);
+			session.setAttribute("name", appUsers);
+			long jobid = Long.parseLong(id);
+			System.out.println("JOB_ID--------->"+jobid);
+			try {
+				List<JobApplication> listApplication = employerDao.listOfCandidatesApplied(jobid);
+				for(JobApplication ja : listApplication) {
+					int userid = ja.getUser().getUserid();
+					System.out.println("USER_ID--------->"+userid);
+					List<AppUsers> appUserInfo = employerDao.getUserInfo(userid);
+					ModelAndView mav = new ModelAndView("candidates-applied");
+					mav.addObject("listapp",listApplication);
+					mav.addObject("listuser",appUserInfo);
+					return mav;
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Error in viewing candidate details");
+			}
+			return null;
 	}
 }

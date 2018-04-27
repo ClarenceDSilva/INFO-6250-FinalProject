@@ -62,35 +62,24 @@ public class StudentDAO extends DAO {
 			}
 		}
 		
+		// Criteria method for checking if the Student has already applied for this job
 		public boolean userExists(AppUsers user, JobDetails jobdetails)throws StudentClassException{
 			try {
 				boolean result = true;
 				System.out.println("Inside CRITERIA METHOD");
 				begin();
-				System.out.println();
-				System.out.println("USERID-------------->"+ user.getUserid());
-				System.out.println("JOBDETAILS-------------->"+jobdetails.getId());
-				Criteria cr1 = getSession().createCriteria(JobApplication.class);
-				cr1.add(Restrictions.lt("user",1));
-				List <JobApplication> results = cr1.list();
-				
-				Criteria cr2 = getSession().createCriteria(JobApplication.class);
-				cr1.add(Restrictions.lt("id",1));
-				List <JobApplication> results2 = cr2.list();
-				System.out.println("SIZE1: "+ results.size()+ " SIZE2: "+ results2.size());
+				Criteria criteria = getSession().createCriteria(JobApplication.class);
+				criteria.add(Restrictions.eq("jobdetails",jobdetails));
+				List <JobApplication> results = criteria.list();
+				//System.out.println("SIZE1: "/*+ results.size()*/+ " SIZE2: "+ results2.size());
 				commit();
 				close();
-				if(results.size() == 0) {
-					result =  false;
-					}
-				else if(results.size() == 2 && results2.size() == 2) {
+				if(results.size() >= 2) {
 						result = true;
 					}
 					else {
 						result = false;
 					}
-				
-				
 				return result;
 				
 			}catch(HibernateException e) {

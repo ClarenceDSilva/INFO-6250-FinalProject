@@ -7,6 +7,7 @@ import org.hibernate.Query;
 
 import com.neu.webtools.exception.JobsPostedException;
 import com.neu.webtools.pojo.AppUsers;
+import com.neu.webtools.pojo.JobApplication;
 import com.neu.webtools.pojo.JobDetails;
 
 public class EmployerDAO extends DAO {
@@ -103,6 +104,38 @@ public class EmployerDAO extends DAO {
 			rollback();
 			throw new JobsPostedException("Error occured while updating the job at the DAO Level", e);
 		}
+	}
+	
+	//Method to list all the candidates JobApplication applied to the post based on id
+	public List<JobApplication> listOfCandidatesApplied(long jobid) throws JobsPostedException{
+		try {
+			begin();
+			System.out.println("PART1: INSIDE listOfCandidatesApplied DAO METHOD ");
+			Query query = getSession().createQuery("from JobApplication where jobdetails= '" + jobid + "' ");
+			List<JobApplication> application = query.list();
+			commit();
+			close();
+			return application;
+		}catch (HibernateException e) {
+            rollback();
+            throw new JobsPostedException("Could not find candidate", e);
+        }
+	}
+	
+	//Method to get list of candidate information using userid
+	public List<AppUsers> getUserInfo(int userid) throws JobsPostedException{
+		try {
+			begin();
+			System.out.println("PART2: INSIDE getUserInfo DAO METHOD ");
+			Query query = getSession().createQuery("from AppUsers where userid= '" + userid + "' ");
+			List<AppUsers> userinfo = query.list();
+			commit();
+			close();
+			return userinfo;
+		}catch (HibernateException e) {
+            rollback();
+            throw new JobsPostedException("Could not find candidate info", e);
+        }
 	}
 	
 }
