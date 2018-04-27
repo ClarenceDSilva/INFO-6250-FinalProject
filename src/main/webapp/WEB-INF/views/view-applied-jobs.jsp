@@ -25,9 +25,9 @@
 	<!-- Custom CSS -->
 <link rel="stylesheet"href="css/footer.css"type="text/css" />
 <link rel="stylesheet"href="css/home.css" type="text/css" />
-<%-- <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/homecss.css" >	
- --%><link  rel="stylesheet" href="css/header.css" type="text/css" />
-<%-- <link  rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css" type="text/css" /> --%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/homecss.css" >	
+<link  rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css" type="text/css" />
+<link  rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css" type="text/css" />
 
 </head>
 <body>
@@ -62,7 +62,7 @@
 			<center><h2>Your applications</h2></center>
 			<form action = "${contextPath}/student/deleteMyApplication.htm" method="get">
 			<table class = "table">
-				<c:forEach var="j" items="${apply}">
+				<c:forEach var="j" items="${jobDetails}">
 				
           		<input type="hidden" name = "jobID" value = "${j.id}" />
 					<tr>

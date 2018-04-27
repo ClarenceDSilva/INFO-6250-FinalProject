@@ -68,6 +68,8 @@
     padding: 2px 0px 0px 2px;
     background-color: #35404f;
     color: #878c94;
+    bottom: 0;
+     position: fixed;
 }
 .footer .title{
     text-align: left;

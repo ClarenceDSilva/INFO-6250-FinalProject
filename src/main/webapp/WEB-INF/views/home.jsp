@@ -52,10 +52,6 @@ body {
     background-size: cover;
     background-color: #cccccc;
 }
-h1, input{
-	
-}
-
 .homepage{
 	
 	background-color: lightblue;

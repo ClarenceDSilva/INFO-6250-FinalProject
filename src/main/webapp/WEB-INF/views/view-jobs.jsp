@@ -28,6 +28,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/homecss.css" >	
 <link  rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css" type="text/css" />
 <link  rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css" type="text/css" />
+<link  rel="stylesheet" href="${pageContext.request.contextPath}/css/viewjobs.css" type="text/css" />
 
 <script>
 	$(document).ready(function(){
@@ -38,6 +39,35 @@
 			}
 		
 		});
+
+	function myFunction() {
+		  // Declare variables 
+		  var input, filter, table, tr, td, i;
+		  input = document.getElementById("myInput");
+		  filter = input.value.toUpperCase();
+		  table = document.getElementById("myTable");
+		  tr = table.getElementsByTagName("tr");
+
+		  // Loop through all table rows, and hide those who don't match the search query
+		  for (i = 0; i < tr.length; i++) {
+		    /* td = tr[i].getElementsByTagName("td")[0]; */
+		    td = tr[i].getElementsByTagName("td")[1];
+		    td = tr[i].getElementsByTagName("td")[2];
+		    td = tr[i].getElementsByTagName("td")[3];
+		    td = tr[i].getElementsByTagName("td")[4];
+		    td = tr[i].getElementsByTagName("td")[5];
+		    td = tr[i].getElementsByTagName("td")[6];
+		    
+		    
+		    if (td) {
+		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+		        tr[i].style.display = "";
+		      } else {
+		        tr[i].style.display = "none";
+		      }
+		    } 
+		  }
+		}
 </script>
 </head>
 <body>
@@ -68,60 +98,52 @@
 		  <strong>Congratulations!! Your application has been sent to the organization.</strong> If you are deemed as the right candidate by the company, you will be contacted on the email you have provided
 		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> X </button>
 		</div>
+		
 		<center><h2>Open Job Listings</h2></center>
-		<table class = "table">
-				<c:forEach var="j" items="${allJobs}">
-				
+		<br><br>
+		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search here..">
+		<table id = "myTable" class = "table">
           		<%-- <input type="hidden" name = "jobID" value = "${j.id}" /> --%>
-					<tr>
-						<td><b>Job ID</b></td>
+				<br><br>
+				<tr class="header">
+					<th style="width: 5%;">Job ID</th>
+					<th style="width: 10%;">Title</th>
+					<th style="width: 5%;">Company Name</th>
+					<th style="width: 5%;">Job Type</th>
+					<th style="width: 10%;">Location</th>
+					<th style="width: 10%;">Industry</th>
+					<th style="width: 10%;">Job For..</th>
+					<th style="width: 20%;">Job-URL</th>
+					<th style="width: 20%;">Description</th>
+					<th style="width: 5%;">Posted On</th>
+					<th style="width: 5%;">Action</th>
+				</tr>
+				<c:forEach var="j" items="${allJobs}">
+				<tr>
 						<td>${j.jobID}</td>
-					</tr>
-					<tr>
-						<td><b>Title</b></td>
 						<td>${j.jobTitle}</td>
-					</tr>
-					<tr>
-						<td><b>Company Name</b></td>
 						<td>${j.companyName}</td>
-					</tr>
-					<tr>
-						<td><b>Job Type</b></td>
 						<td>${j.jobType}</td>
-					</tr>
-					<tr>
-						<td><b>Location</b></td>
 						<td>${j.state}, ${j.country}</td>
-					</tr>
-					<tr>
-						<td><b>Industry</b></td>
 						<td>${j.industry}</td>
-					</tr>
-					<tr>
-						<td><b>Job For</b></td>
 						<td>${j.major}</td>
+						
+					<c:if test= "${empty j.jobUrl}"> 
+					<td>No link available. Please check the company's website</td></c:if>
+					<c:if test= "${not empty j.jobUrl}"> 
+					<td>${j.jobUrl}</td></c:if>
+					
+					<c:if test= "${empty j.description}"> 
+					<td>No description provided</td></c:if>
+					<c:if test= "${not empty j.description}"> 
+					<td>${j.description}</td></c:if>
+					
+					<td>${j.postedOn}</td>
+					<td><a href="${contextPath}/student/showUploadPage.htm?jobID=${j.id}&name=${name.fname}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Apply for this job</a></td>
 					</tr>
-					<tr>
-						<td><b>Job-URL</b></td>
-						<c:if test= "${empty j.jobUrl}"> 
-						<td>No link available. Please check the company's website</td></c:if>
-						<c:if test= "${not empty j.jobUrl}"> 
-						<td>${j.jobUrl}</td></c:if>
-					</tr>
-					<tr>
-						<td><b>Description</b></td>
-						<c:if test= "${empty j.description}"> 
-						<td>No description provided</td></c:if>
-						<c:if test= "${not empty j.description}"> 
-						<td>${j.description}</td></c:if>
-					</tr>
-						<td><b>Posted On</b></td>
-						<td>${j.postedOn}</td>
-					</tr>
-					<tr><td></td><td><a href="${contextPath}/student/showUploadPage.htm?jobID=${j.id}&name=${name.fname}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Apply for this job</a></td></tr>
-					<br>
-				</c:forEach>
-				</table>
+				</tr>
+			</c:forEach>
+			</table>
 		
         </div>
         <div><br><br></div>

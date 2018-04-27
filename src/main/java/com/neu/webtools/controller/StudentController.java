@@ -42,10 +42,10 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "student/showUploadPage.htm", method = RequestMethod.GET)
-	public ModelAndView showApplicationPage(HttpServletRequest request, EmployerDAO employerDao,StudentDAO studentDao)
+	public ModelAndView showApplicationPage(HttpServletRequest request, EmployerDAO employerDao, StudentDAO studentDao)
 			throws JobsPostedException, StudentClassException {
 		HttpSession session = (HttpSession) request.getSession();
-		
+
 		// Fetching Job ID of the job for applying and then setting it into session
 		String jobID = request.getParameter("jobID");
 		long id = Long.parseLong(jobID);
@@ -57,7 +57,7 @@ public class StudentController {
 		// APPUSERS--------------->: "+appUsers);
 		System.out.println("INSIDE showApplicationPage method");
 		return new ModelAndView("apply-job");
-	
+
 	}
 
 	@RequestMapping(value = "student/apply.htm", method = RequestMethod.POST)
@@ -69,26 +69,27 @@ public class StudentController {
 		JobDetails jobdetails = (JobDetails) request.getSession().getAttribute("jobID");
 		AppUsers appUsers = (AppUsers) request.getSession().getAttribute("name");
 		System.out.println("JOBDETAILS: " + jobdetails + " APPUSERS: " + appUsers);
-		//System.out.println("ISEIZE" + list.size());
+		// System.out.println("ISEIZE" + list.size());
 
 		try {
 			token = studentDao.userExists(appUsers, jobdetails);
-			if(token == true) {
-				return new ModelAndView("errors", "errorMessage","You have already applied for this job");
-			}else {
-			request.getSession().setAttribute("name", appUsers);
-			request.getSession().setAttribute("JobID", jobdetails);
-			if (fileUpload != null && fileUpload.length > 0) {
-				for (CommonsMultipartFile aFile : fileUpload) {
-					System.out.println("Saving file: " + aFile.getOriginalFilename());
-					JobApplication uploadFile = new JobApplication();
-					uploadFile.setFileName(aFile.getOriginalFilename());
-					uploadFile.setData(aFile.getBytes());
-					uploadFile.setUser(appUsers);
-					uploadFile.setJobdetails(jobdetails);
-					studentDao.saveFiles(uploadFile);
+			if (token == true) {
+				return new ModelAndView("errors", "errorMessage", "You have already applied for this job");
+			} else {
+				request.getSession().setAttribute("name", appUsers);
+				request.getSession().setAttribute("JobID", jobdetails);
+				if (fileUpload != null && fileUpload.length > 0) {
+					for (CommonsMultipartFile aFile : fileUpload) {
+						System.out.println("Saving file: " + aFile.getOriginalFilename());
+						JobApplication uploadFile = new JobApplication();
+						uploadFile.setFileName(aFile.getOriginalFilename());
+						uploadFile.setData(aFile.getBytes());
+						uploadFile.setUser(appUsers);
+						uploadFile.setJobdetails(jobdetails);
+						studentDao.saveFiles(uploadFile);
+					}
 				}
-			}}
+			}
 			jd.add(jobdetails);
 			request.getSession().setAttribute("jobList", jd);
 			return new ModelAndView("view-jobs");
@@ -104,27 +105,45 @@ public class StudentController {
 	public ModelAndView listAllApplications(HttpServletRequest request, StudentDAO studentDao) throws Exception {
 		try {
 			AppUsers appUsers = (AppUsers) request.getSession().getAttribute("name");
-			List<JobDetails> jd = (List<JobDetails>)request.getSession().getAttribute("jobList");
-			//JobDetails jobdetails = (JobDetails) request.getSession().getAttribute("jobID");
-			//System.out.println("JOBID------------>" + jobdetails);
+			List<JobDetails> jd = (List<JobDetails>) request.getSession().getAttribute("jobList");
+			// JobDetails jobdetails = (JobDetails)
+			// request.getSession().getAttribute("jobID");
+			// System.out.println("JOBID------------>" + jobdetails);
 			System.out.println("USERID: " + appUsers.getUserid());
-			// List<JobDetails> applications = studentDao.listAppliedJobs(jobdetails);
-			System.out.println("SIZE:-> " + jd.size());
-			return new ModelAndView("view-applied-jobs", "apply", jd);
+			//List<List<JobDetails>> jobs = new ArrayList<List<JobDetails>>();
+			List<JobDetails> jobs = new ArrayList<JobDetails>();
+			List<JobDetails> jobDetails = new ArrayList<JobDetails>();
+			List<JobApplication> applicationsDetails = studentDao.listAppliedJobs(appUsers);
+			ModelAndView mav = new ModelAndView("view-applied-jobs");
+			for (JobApplication ja : applicationsDetails) {
+				long jobId = ja.getJobdetails().getId();
+				jobDetails = studentDao.allJobDetails(jobId) ;
+				//jobs.add((JobDetails) jobDetails);
+
+				// return new ModelAndView("view-applied-jobs", "jobDetails", jobDetails);
+				System.out.println("JOBS "+ jobs);
+			}
+			mav.addObject("jobDetails", jobDetails);
+			//mav.addObject("listJobDetails", jobs);
+			return mav;
+			// System.out.println("SIZE:-> " + jd.size());
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return new ModelAndView("errors", "errorMessage",
 					"Error occured while listing all jobs at the Controller level");
 
 		}
+		// return null;
 	}
-	
+
 	@RequestMapping(value = "/student/deleteMyApplication.htm", method = RequestMethod.GET)
 	public ModelAndView deleteJobPost(HttpServletRequest request, StudentDAO studentDao) throws StudentClassException {
 		System.out.println("INSIDE deleteJobPost CONTROLLER METHOD");
 		HttpSession session = (HttpSession) request.getSession();
 		String jobId = request.getParameter("jobID");
-		//JobDetails jobdetails = (JobDetails) request.getSession().getAttribute("jobID");
+		// JobDetails jobdetails = (JobDetails)
+		// request.getSession().getAttribute("jobID");
 		try {
 			if (jobId.equals(null)) {
 				System.out.println("No Id found to delete the job post");

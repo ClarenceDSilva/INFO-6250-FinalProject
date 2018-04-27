@@ -89,15 +89,16 @@ public class StudentDAO extends DAO {
 		}
 	
 	// Method for listing all applications of the candidate
-	public List<JobDetails> listAppliedJobs(JobDetails jobdetails)throws StudentClassException{
+	public List<JobApplication> listAppliedJobs(AppUsers user)throws StudentClassException{
 		
 		try {
 			System.out.println("INSIDE listAppliedJobs METHOD");
 			begin();
+			System.out.println("PART1: INSIDE listAppliedJobs DAO METHOD ");
 			//List<JobDetails> allJobDetails = new ArrayList<JobDetails>();
 			//int userId = user.getUserid();
-			Query query = getSession().createQuery("from JobDetails where id = '" + jobdetails.getId() + "' ");
-			List<JobDetails> allJobDetails = query.list();
+			Query query = getSession().createQuery("from JobApplication where user = '" + user.getUserid() + "' ");
+			List<JobApplication> jobApplications = query.list();
 			/*for(JobApplication j : allApplications) {
 			Query query1 = getSession().createQuery("from JobDetails where id = '" + j.getJobdetails() + "' ");
 				allJobDetails = query1.list();
@@ -107,7 +108,24 @@ public class StudentDAO extends DAO {
 			}*/
 			commit();
 			close();
-			return allJobDetails;
+			return jobApplications;
+		}catch(HibernateException e) {
+			rollback();
+			e.printStackTrace();
+			throw new StudentClassException("Error occured in fetching data at DAO level",e);
+		}
+	}
+	
+	//Method for listing all the job details based on the job Id
+	public List<JobDetails> allJobDetails(long jobId) throws StudentClassException{
+		try {
+			System.out.println("PART2: INSIDE allJobDetails DAO METHOD ");
+			begin();
+			Query query = getSession().createQuery("from JobDetails where id = '" + jobId + "' ");
+			List<JobDetails> jobDetails = query.list();
+			commit();
+			close();
+			return jobDetails;
 		}catch(HibernateException e) {
 			rollback();
 			e.printStackTrace();
