@@ -123,7 +123,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"><i class="fas fa-exclamation-triangle"></i> Warning: Delete Post?</h4>
+          <h4 class="modal-title" style="color:red"><i class="fas fa-exclamation-triangle"></i> Warning: Delete Post?</h4>
         </div>
         <div class="modal-body">
           <p>Are you sure you want to delete this job post? This action cannot be undone.</p>

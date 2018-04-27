@@ -43,8 +43,11 @@ public class AppUsers {
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user",orphanRemoval = true)
 	private List<JobDetails> jobDetails = new ArrayList<JobDetails>();
+	
+	@OneToMany(mappedBy = "user",orphanRemoval = true)
+	private List<JobApplication> applications = new ArrayList<JobApplication>();
 	
 	
 	public void setUserid(int userid) {
@@ -97,6 +100,12 @@ public class AppUsers {
 		this.role = role;
 	}
 	
+	public List<JobApplication> getApplications() {
+		return applications;
+	}
+	public void setApplications(List<JobApplication> applications) {
+		this.applications = applications;
+	}
 	public AppUsers() {
 		
 	}

@@ -1,7 +1,8 @@
 package com.neu.webtools.pojo;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -63,6 +64,8 @@ public class JobDetails {
 	@Temporal(TemporalType.DATE)
 	private Date postedOn;
 	
+	@OneToMany(fetch = FetchType.LAZY)
+	private List<JobApplication> application = new ArrayList<JobApplication>();
 	
 	public long getId() {
 		return id;
@@ -143,5 +146,12 @@ public class JobDetails {
 	public void setPostedOn(Date postedOn) {
 		this.postedOn = postedOn;
 	}
+	public List<JobApplication> getApplication() {
+		return application;
+	}
+	public void setApplication(List<JobApplication> application) {
+		this.application = application;
+	}
+	
 	
 }

@@ -46,7 +46,7 @@
                                 <a href="${contextPath}/logout.htm">Logout</a>
                             </div></div></div>
                      <div class="col-xs-4" style="background-color:#35404f;"><a href="${contextPath}/student/viewalljobs.htm?name=${name}" style="color: lightblue; text-decoration:none">View all jobs</a></div>
-                    <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">View my applied jobs</a></div>
+                    <div class="col-xs-5" style="background-color:#35404f;"><a href="${contextPath}/student/viewMyJobs.htm?name=${name}" style="color: lightblue; text-decoration:none">View my applied jobs</a></div>
                      <div class="col-xs-5" style="background-color:#35404f;"><a href="#" style="color: lightblue; text-decoration:none">Github jobs</a></div>
                 </div>
             </div>

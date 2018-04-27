@@ -3,6 +3,7 @@ package com.neu.webtools.pojo;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,12 +30,12 @@ public class JobApplication {
 	@Column(name = "FILE_DATA", length = 1000000000)
 	private byte[] data;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "userid")
 	private AppUsers user;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
-	@JoinColumn(name = "jobid")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "jobId")
 	private JobDetails jobdetails;
 	
 	public long getId() {
