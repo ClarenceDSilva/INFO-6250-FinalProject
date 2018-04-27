@@ -23,7 +23,7 @@ public class HomePageController {
 	@RequestMapping(value = "register.htm", method = RequestMethod.POST)
 	public String register(HttpServletRequest request, AppUsersDAO appUsersDao, ModelMap map) {
 		System.out.println("Into register controller");
-		
+		boolean token = true;
 		String firstname = request.getParameter("fname");
 		String lastname = request.getParameter("lname");
 		String email = request.getParameter("email");
@@ -31,10 +31,14 @@ public class HomePageController {
 		String password = request.getParameter("pwd");
 		String r= request.getParameter("role");
 		
-		Role role = new Role();
-		role.setRole_name(r);
-		
 		AppUsers user = new AppUsers();
+		Role role = new Role();
+		token = appUsersDao.registerCriteria(email, username);
+		if(token == true) {
+			map.addAttribute("errorMessage", "Username or emailId has already been registered");
+			return "home";
+		}
+		role.setRole_name(r);
 		user.setFname(firstname);
 		user.setLname(lastname);
 		user.setEmail(email);

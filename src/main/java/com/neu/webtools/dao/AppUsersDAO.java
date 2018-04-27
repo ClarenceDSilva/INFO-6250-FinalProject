@@ -1,9 +1,14 @@
 package com.neu.webtools.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import com.neu.webtools.pojo.AppUsers;
+import com.neu.webtools.pojo.JobApplication;
 
 public class AppUsersDAO extends DAO {
 	
@@ -51,6 +56,33 @@ public class AppUsersDAO extends DAO {
 			return null;
 		}
 		
+	}
+	
+	//Criteria for registration
+	public boolean registerCriteria(String email, String username) {
+		try {
+			boolean result = true;
+			System.out.println("Inside CRITERIA METHOD");
+			begin();
+			Criteria criteria = getSession().createCriteria(AppUsers.class);
+			criteria.add(Restrictions.eq("email", email));
+			List<AppUsers> crit1 = criteria.list();
+			criteria.add(Restrictions.eq("username", username));
+			List<AppUsers> crit2 = criteria.list();
+			System.out.println("EMAIL SIZE "+crit1.size()+" USERNAME SIZE"+crit2.size());
+			commit();
+			close();
+			if((crit1.size() == 1) || (crit2.size() == 1)) {
+				result = true;
+			}else {
+				result = false;
+			}
+			return result;
+		}catch(HibernateException e){
+			rollback();
+			e.printStackTrace();
+		}
+		return true;
 	}
 }
 

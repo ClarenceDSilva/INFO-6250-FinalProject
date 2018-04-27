@@ -44,9 +44,8 @@ public class StudentController {
 	@RequestMapping(value = "student/showUploadPage.htm", method = RequestMethod.GET)
 	public ModelAndView showApplicationPage(HttpServletRequest request, EmployerDAO employerDao,StudentDAO studentDao)
 			throws JobsPostedException, StudentClassException {
-		
-		//ModelAndView mav = new ModelAndView("apply-job");
 		HttpSession session = (HttpSession) request.getSession();
+		
 		// Fetching Job ID of the job for applying and then setting it into session
 		String jobID = request.getParameter("jobID");
 		long id = Long.parseLong(jobID);
@@ -57,9 +56,6 @@ public class StudentController {
 		// System.out.println("JOBDETAILS-------->: "+jobdetails+ "
 		// APPUSERS--------------->: "+appUsers);
 		System.out.println("INSIDE showApplicationPage method");
-		
-		//token = studentDao.userExists(appUsers, jobdetails);
-		//System.out.println("ISEIZE" + list.size());
 		return new ModelAndView("apply-job");
 	
 	}

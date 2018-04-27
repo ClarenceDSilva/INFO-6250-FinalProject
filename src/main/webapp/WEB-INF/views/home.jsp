@@ -33,10 +33,10 @@
 			$("div.login").show(1000);
 		});
 
-		$("div.submit-registration").click(function() {
-			console.log("alert displayed")
-			$("div.alert").show();
-		});
+		if (window.location.href.indexOf("/register.htm") > -1) {
+				$("div.alert").show();
+			}
+		
 
 		$("div.submit-login").click(function() {
 			console.log("alert displayed")
