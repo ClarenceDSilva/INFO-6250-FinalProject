@@ -1,4 +1,5 @@
-#INFO 6250: Web Development Tools and methods final project
+# INFO 6250: Web Development Tools and methods final project
+
 A refreshing take to the NU-Careers application which also involves the intervention of employers along with the university students. The portal acts as a unified place for both the employers and students. No admin intervention is needed as roles and tasks are specifically designed for both employers and students.
 
 Roles and its functionalities:
